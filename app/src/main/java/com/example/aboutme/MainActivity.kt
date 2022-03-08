@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //The current issue with calling editText is that it creates a lot of overhead for our mainactivity class
+    //We will fix this by using something called data binding
     private fun addNickename(view: View) {
         //view is our button
         val editText = findViewById<EditText>(R.id.nickname_edit)
@@ -40,3 +42,4 @@ class MainActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
+
