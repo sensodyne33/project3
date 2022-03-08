@@ -29,6 +29,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    //we need to enable dataBinding library in order to use it
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
