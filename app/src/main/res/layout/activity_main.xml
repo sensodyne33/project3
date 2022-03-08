@@ -42,6 +42,8 @@
 
         <TextView
             android:id="@+id/nickname_text"
+            android:background="@color/colorAccent"
+            android:paddingBottom="@dimen/small_padding"
             style="@style/NameStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

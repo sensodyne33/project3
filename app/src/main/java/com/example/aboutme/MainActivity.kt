@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.example.aboutme.databinding.ActivityMainBinding
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,12 +27,17 @@ class MainActivity : AppCompatActivity() {
         binding.doneButton.setOnClickListener{
             addNickname(it)
         }
+
+        //update nickname_text by passing it as a param to updateNickname() when we click
+        //on nickname_text
+        findViewById<TextView>(R.id.nickname_text).setOnClickListener{
+            updateNickname(it)
+        }
     }
 
     //The current issue with calling editText is that it creates a lot of overhead for our mainactivity class
     //We will fix this by using something called data binding
     private fun addNickname(view: View) {
-
         //make code easier to read using binding.apply
         binding.apply {
             nicknameText.text = binding.nicknameEdit.text
@@ -46,8 +52,32 @@ class MainActivity : AppCompatActivity() {
         //hide keyboard after done typing
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
-
     }
+
+    //allows us to editText
+    private fun updateNickname (view: View) {
+        //1. find reference to nickname_edit and DONE button
+        val editText = findViewById<EditText>(R.id.nickname_edit)
+        val doneButton = findViewById<Button>(R.id.done_button)
+
+        //2.add code to show edit text, show the DONE button, and hide the text view
+        editText.visibility = View.VISIBLE
+        doneButton.visibility = View.VISIBLE
+        view.visibility = View.GONE
+
+        //3. on the onCreate function call setOnClickListener on the nickname_text text view. In here,
+        //pass the reference to the click-listener function which is updateNickname()
+
+        //4. users don't know can't tell if nickname_text is editable; we need to make it seem editable
+        //set focus to the edit text
+        editText.requestFocus()
+
+        //5. show the keyboard
+        //show keyboard if nickname text is clicked
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(editText, 0)
+    }
+
 }
 
 /* Why use data binding?
